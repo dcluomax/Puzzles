@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>Welcome to MAM CTF Web200</title>
+</head>
+<body>
+<h1>Level 2</h1>
+ICM! <b>Bad_Server</b> is acting weird! Oh No! Customer's data are encrypted with a key!<b>MAM Team</b>, can you help?.
+<input type="text" id="mamOracle"></input>
+<input type="button" id="tester" value="Test Key" />
+</body>
+<script src="jQuery.min.js"></script>
+<!-- Hint: Server is acting weird. -->
+<script>
+$("#tester").click(function(){
+tryKey=$('#mamOracle').val();
+jQuery.get( "index.php?level=1&key="+tryKey, function( data ) {})
+.done(function() {
+    alert( "ICM resolved!" );
+	window.location.replace("index.php");
+  })
+  .fail(function() {
+    alert( "Customers are still locked!" );
+  });});
+</script>
+</html>

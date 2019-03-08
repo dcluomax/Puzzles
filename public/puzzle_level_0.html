@@ -1,0 +1,26 @@
+<html>
+<head>
+<title>Welcome to MAM CTF Web100</title>
+<script src='config.js' />
+<script>
+key="tReasuresAre0ftenH1dden";
+</script>
+</head>
+<body>
+<h1>Level 1</h1>
+OOPS! The customers are unable to login because one of the key is wrong! What is the key?
+<input type="text" id="mamOracle" required></input>
+<input type="button" onclick="test()" value="Test Key" />
+</body>
+<!-- Hint: This challenge involves HTML tag understanding -->
+<script>
+function test(){
+var tryThis = document.getElementById('mamOracle').value;
+if(tryThis===key){
+alert("Nice! you found the key!");
+window.location.replace("index.php?level=0&key="+tryThis);
+}else{
+alert("Wrong key!");}
+}
+</script>
+</html>
