@@ -1,25 +1,37 @@
 <html>
 <head>
-<title>Welcome to MAM CTF Web200</title>
+<title>Welcome to MAM CYPTO 200</title>
 </head>
 <body>
-<h1>Level 2</h1>
-ICM! <b>Bad_Server</b> is acting weird! Oh No! Customer's data are encrypted with a key!<b>MAM Team</b>, can you help?.
-<input type="text" id="mamOracle"></input>
-<input type="button" id="tester" value="Test Key" />
-</body>
-<script src="jQuery.min.js"></script>
-<!-- Hint: Server is acting weird. -->
-<script>
-$("#tester").click(function(){
-tryKey=$('#mamOracle').val();
-jQuery.get( "index.php?level=1&key="+tryKey, function( data ) {})
-.done(function() {
-    alert( "ICM resolved!" );
-	window.location.replace("index.php");
-  })
-  .fail(function() {
-    alert( "Customers are still locked!" );
-  });});
-</script>
+    <h1>Level 2</h1>
+    <div class="col-md-10">
+        <h3>Repeating-key XOR</h3>
+        In some Intune svc repo, a dev checked in a cipher text and decrypt in runtime to avoid calling KV.
+        <p>
+        <b>361505283e0628183224123206523430</b>
+        </p>
+        Obviously this is not secure, but he does not want to fix! Later we found the xor key he used is "Mam". 
+        <br/>
+        Can you decrypt the cipher and prove to him that this is insecure? 
+      </div>
+      <br/>
+  <input type="text" id="mamOracle"></input>
+  <input type="button" id="tester" value="Test Key" />
+
+  </p>
+  </body>
+  <script src="jQuery.min.js"></script>
+  <script>
+  $("#tester").click(function(){
+  tryKey=$('#mamOracle').val();
+  jQuery.get( "index.php?level=1&key="+tryKey, function( data ) {})
+  .done(function() {
+      alert( "Amazing, you solved this difficult puzzle!" );
+      window.location.replace("index.php?level=1&key="+tryKey);
+    })
+    .fail(function() {
+      alert( "You did not unlock the force." );
+    });});
+  </script>
+  </html>
 </html>

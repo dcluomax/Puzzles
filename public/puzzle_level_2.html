@@ -1,31 +1,46 @@
 <html>
 <head>
-<title>Welcome to MAM CTF Web300</title>
-<script>
-Key="thePowerOfSourceCode";
-function mam(k){
-	return k==Key;
-}
-</script>
+<title>Welcome to MAM CYPTO 300</title>
 </head>
 <body>
-<h1>Level 3</h1>
-Someone checked in a key, Now there is a bug :( Only you can debug it! and find the key!
-<br/>
-<input type="text" id="mamOracle"></input>
-<input type="button" id="tester" value="Test Key" />
-</body>
-<script src="jQuery.js"></script>
-<!-- Hint: This challenge involves understanding basic javascript compiling process -->
-<script>
-$("#tester").click(function(){
-tryKey=$('#mamOracle').val();
-if(mam(tryKey)){
-	alert("Good job! You resolved the bug!");
-	window.location.replace("index.php?level=2&key="+tryKey);
-		}else{
-	alert("You have the wrong key!");
-	}
-});
-</script>
+    <h1>Level 3</h1>
+    <div class="col-md-10">
+        <h3>Buggy AES-128-ECB</h3>
+        We have a cipher text <b>615c066e804cad769322e8c3ac7a33c24d450193fc5ef04fb3ebaf02cf0648b8</b> encrypted with AES using Electronic Codebook (ECB) mode with unknown key.
+        <br/><br/>
+        <a href="https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation">https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation</a>
+        <br/><br/>
+        turns out this cipher text contains a very important key for MAM to buildreq. No one can debug the buggy decryption function, can you help with decryption using the ECB properties?
+      </div>
+      <br/>
+  <input type="text" id="key" size="64" value="615c066e804cad769322e8c3ac7a33c24d450193fc5ef04fb3ebaf02cf0648b8" />
+  <input type="button" id="oracle" value="Ask buggy Oracle to decrypt" />
+  <div id="say"></div>
+  <br/>
+  <input type="text" id="mamOracle"></input>
+  <input type="button" id="tester" value="Submit Key" />
+  </p>
+  </body>
+  <script src="jQuery.min.js"></script>
+  <script>
+     $("#oracle").click(function(){
+       try{       var words = buggyAesDecrypt($('#key').val()) || "Error decrypting";
+       $("#say").text(words); 
+      }catch{
+        $("#say").text("Decryption Failed"); 
+      }
+
+     });
+  $("#tester").click(function(){
+  tryKey=$('#key').val();
+  jQuery.get( "index.php?level=3&key="+tryKey, function( data ) {})
+  .done(function() {
+      alert( "Amazing, you solved this difficult puzzle!" );
+      window.location.replace("index.php?level=3&key="+tryKey);
+    })
+    .fail(function() {
+      alert( "You did not unlock the force." );
+    });});
+  </script>
+  </html>
 </html>

@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>Welcome to MAM CTF Web300</title>
+<script>
+Key="thePowerOfSourceCode";
+function mam(k){
+	return k==Key;
+}
+</script>
+</head>
+<body>
+<h1>Level 3</h1>
+Someone checked in a key, Now there is a bug :( Only you can debug it! and find the key!
+<br/>
+<input type="text" id="mamOracle"></input>
+<input type="button" id="tester" value="Test Key" />
+</body>
+<script src="jQuery.js"></script>
+<!-- Hint: This challenge involves understanding basic javascript compiling process -->
+<script>
+$("#tester").click(function(){
+tryKey=$('#mamOracle').val();
+if(mam(tryKey)){
+	alert("Good job! You resolved the bug!");
+	window.location.replace("index.php?level=2&key="+tryKey);
+		}else{
+	alert("You have the wrong key!");
+	}
+});
+</script>
+</html>

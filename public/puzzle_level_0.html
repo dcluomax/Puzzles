@@ -1,26 +1,42 @@
 <html>
 <head>
-<title>Welcome to MAM CTF Web100</title>
-<script src='config.js' />
-<script>
-key="tReasuresAre0ftenH1dden";
-</script>
+<title>Welcome to MAM CYPTO 100</title>
 </head>
 <body>
 <h1>Level 1</h1>
-OOPS! The customers are unable to login because one of the key is wrong! What is the key?
-<input type="text" id="mamOracle" required></input>
-<input type="button" onclick="test()" value="Test Key" />
-</body>
-<!-- Hint: This challenge involves HTML tag understanding -->
-<script>
-function test(){
-var tryThis = document.getElementById('mamOracle').value;
-if(tryThis===key){
-alert("Nice! you found the key!");
-window.location.replace("index.php?level=0&key="+tryThis);
-}else{
-alert("Wrong key!");}
-}
-</script>
+
+<div class="col-md-10">
+    <h3>Single-byte XOR cipher</h3>
+    <p>
+
+      While using fiddler to debug graph, we found this strange communication is being transmitted. The message looks like some hex encoded key:
+</p>
+<b>0b700b4d0b620b790b780b7f0b540b5f0b6a0b780b7f0b6e0b540b640b6d0b540b5d0b620b680b7f0b640b790b720b76</b>
+<p>
+Out of curiosity, we searched the repo and realize this has been XOR'd against a single character. <br/>
+However, the key is fetched from KV. Can you find the character, and decrypt the message?
+</p>
+<p>
+You can do this by hand. But don't: write code to do it for you!
+</p>
+
+  </div>
+  <input type="text" id="mamOracle"></input>
+  <input type="button" id="tester" value="Test Key" />
+  </p>
+  </body>
+  <script src="jQuery.min.js"></script>
+  <script>
+  $("#tester").click(function(){
+  tryKey=$('#mamOracle').val();
+  jQuery.get( "index.php?level=0&key="+tryKey, function( data ) {})
+  .done(function() {
+      alert( "Amazing, you solved this first crypto puzzle!" );
+      window.location.replace("index.php?level=0&key="+tryKey);
+    })
+    .fail(function() {
+      alert( "You did not unlock the puzzle." );
+    });});
+  </script>
+  </html>
 </html>
